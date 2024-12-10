@@ -21,13 +21,13 @@ Fixed::Fixed() : _fixedPointValue(0)
 
 Fixed::Fixed(int num)
 {
-	setRawBits(num<<8);
+	setRawBits(num<<_fractionalBits);
 	std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(float num)
 {
-	setRawBits(roundf(num * 256));
+	setRawBits(roundf(num * (1<<_fractionalBits)));
 	std::cout << "Float constructor called" << std::endl;
 }
 
@@ -61,12 +61,12 @@ void	Fixed::setRawBits(int const raw)
 
 float	Fixed::toFloat(void) const
 {
-	return (static_cast<float>(_fixedPointValue) / static_cast<float>(256));
+	return (static_cast<float>(_fixedPointValue) / static_cast<float>((1<<_fractionalBits)));
 }
 
 int		Fixed::toInt(void) const
 {
-	return (_fixedPointValue>>8);
+	return (_fixedPointValue>>_fractionalBits);
 }
 
 std::ostream& operator<<(std::ostream& stream, const Fixed& fixed)

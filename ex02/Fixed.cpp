@@ -20,12 +20,12 @@ Fixed::Fixed() : _fixedPointValue(0)
 
 Fixed::Fixed(int num)
 {
-	setRawBits(num<<8);
+	setRawBits(num<<_fractionalBits);
 }
 
 Fixed::Fixed(float num)
 {
-	setRawBits(roundf(num * 256));
+	setRawBits(roundf(num * (1<<_fractionalBits)));
 }
 
 Fixed::Fixed(const Fixed& fixed)
@@ -55,12 +55,12 @@ void	Fixed::setRawBits(int const raw)
 
 float	Fixed::toFloat(void) const
 {
-	return (static_cast<float>(_fixedPointValue) / static_cast<float>(256));
+	return (static_cast<float>(_fixedPointValue) / static_cast<float>((1<<_fractionalBits)));
 }
 
 int		Fixed::toInt(void) const
 {
-	return (_fixedPointValue>>8);
+	return (_fixedPointValue>>_fractionalBits);
 }
 
 std::ostream& operator<<(std::ostream& stream, const Fixed& fixed)
@@ -116,14 +116,14 @@ Fixed	Fixed::operator-(const Fixed& left)
 Fixed	Fixed::operator*(const Fixed& left)
 {
 	Fixed tmp;
-	tmp.setRawBits(roundf(this->toFloat() * left.toFloat() * 256));
+	tmp.setRawBits(roundf(this->toFloat() * left.toFloat() * (1<<_fractionalBits)));
 	return (tmp);
 }
 
 Fixed	Fixed::operator/(const Fixed& left)
 {
 	Fixed tmp;
-	tmp.setRawBits(roundf(this->toFloat() / left.toFloat() * 256));
+	tmp.setRawBits(roundf(this->toFloat() / left.toFloat() * (1<<_fractionalBits)));
 	return (tmp);
 }
 
