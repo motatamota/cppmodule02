@@ -99,28 +99,28 @@ bool	Fixed::operator!=(const Fixed& left) const
 	return (this->getRawBits() != left.getRawBits());
 }
 
-Fixed	Fixed::operator+(const Fixed& left)
+Fixed	Fixed::operator+(const Fixed& left) const
 {
 	Fixed tmp;
 	tmp.setRawBits(this->getRawBits() + left.getRawBits());
 	return (tmp);
 }
 
-Fixed	Fixed::operator-(const Fixed& left)
+Fixed	Fixed::operator-(const Fixed& left) const
 {
 	Fixed tmp;
 	tmp.setRawBits(this->getRawBits() - left.getRawBits());
 	return (tmp);
 }
 
-Fixed	Fixed::operator*(const Fixed& left)
+Fixed	Fixed::operator*(const Fixed& left) const
 {
 	Fixed tmp;
 	tmp.setRawBits(roundf(this->toFloat() * left.toFloat() * (1<<_fractionalBits)));
 	return (tmp);
 }
 
-Fixed	Fixed::operator/(const Fixed& left)
+Fixed	Fixed::operator/(const Fixed& left) const
 {
 	Fixed tmp;
 	tmp.setRawBits(roundf(this->toFloat() / left.toFloat() * (1<<_fractionalBits)));

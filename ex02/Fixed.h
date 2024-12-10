@@ -38,10 +38,10 @@ public:
 	bool				operator<=(const Fixed& left) const;
 	bool				operator==(const Fixed& left) const;
 	bool				operator!=(const Fixed& left) const;
-	Fixed				operator+(const Fixed& left);
-	Fixed				operator-(const Fixed& left);
-	Fixed				operator*(const Fixed& left);
-	Fixed				operator/(const Fixed& left);
+	Fixed				operator+(const Fixed& left) const;;
+	Fixed				operator-(const Fixed& left) const;;
+	Fixed				operator*(const Fixed& left) const;;
+	Fixed				operator/(const Fixed& left) const;;
 	Fixed&				operator++();
 	Fixed				operator++(int);
 	Fixed&				operator--();
